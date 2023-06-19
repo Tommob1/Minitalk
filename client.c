@@ -6,7 +6,7 @@
 /*   By: btomlins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 15:57:03 by btomlins          #+#    #+#             */
-/*   Updated: 2023/06/19 14:38:23 by btomlins         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:05:07 by btomlins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,29 @@ void    char_to_binary(char c)
     while (mask)
     {
         unsigned char   bit = (c & mask) ? '1' : '0';
-        putchar(bit);
+        write(1, &bit, 1);
         mask >>= 1;
     }
+}
+
+char    binary_to_char(const char   *binary)
+{
+    char character;
+
+    if (binary[8] != '\0')
+    {
+        return (0);
+    }
+
+    character = (binary[0] - '0') << 7 |
+                (binary[1] - '0') << 6 |
+                (binary[2] - '0') << 5 |
+                (binary[3] - '0') << 4 |
+                (binary[4] - '0') << 3 |
+                (binary[5] - '0') << 2 |
+                (binary[6] - '0') << 1 |
+                (binary[7] - '0');
+    return (character);
 }
 
 void    print_bits(unsigned char octet)
