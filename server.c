@@ -9,3 +9,18 @@
 /*   Updated: 2023/06/16 15:57:20 by btomlins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "minitalk.h"
+
+void	printPID()
+{
+	pid_t 	pid;
+
+	pid = getpid();
+	ft_printf("PID: %d\n", pid);	
+}
+
+int	main(void)
+{
+	printPID();
+	return (0);
+}
