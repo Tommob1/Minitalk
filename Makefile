@@ -10,27 +10,52 @@
 #                                                                              #
 # **************************************************************************** #
 
-#SOURCES
+CNAME		=	client
 
-#Files
-SERVER	=	server.c
-CLIENT	=	client.c
-LIBFT	=	cd libft && make
-LIB		=	libft/libft.a
-PRINTF	=	cd ft_printf && make
-PRINT	=	ft_printf/libftprintf.a
+SNAME		=	server
 
-#Sources and Objects
-SERVER_SRC	=	$(SERVER)
-SERVER_OBJS	=	$(SERVER_SRC:.c=.o)
-CLIENT_SRC	=	$(CLIENT)
-CLIENT_OBJS	=	$(CLIENT_OBJS) \
-						$(SERVER_OBJS)
+SRCS_SERVER	=	server.c libft/ft_atoi.c	libft/ft_memset.c	\
+			libft/ft_strlen.c	ft_printf/printf.c	ft_printf/printf_hex.c \
+			ft_printf/printf_char.c	ft_printf/printf_str.c
 
-#CONSTANT STRINGS
-GCC			=	gcc
-FLAGS		=	-Wall -Werror -Wextra
-INCLUDE		=	-I include
-SERVER_NAME	=	server
-CLIENT_NAME	=	client
-NAME		=	server
+SRCS_CLIENT	=	client.c libft/ft_atoi.c	libft/ft_memset.c \
+				ft_printf/printf.c	libft/ft_strlen.c	ft_printf/printf_hex.c \
+				ft_printf/printf_char.c	ft_printf/printf_str.c	\
+				ft_printf/printf_char.c
+
+OBJS_SERVER = $(SRCS_SERVER:.c=.o)
+OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
+
+LIB_SRCS	=	libft/ft_atoi.c	libft/ft_memset.c
+
+PRINT_SRCS	=	ft_printf/printf.c libft/ft_strlen.c ft_printf/printf_hex.c \
+				ft_printf/printf_char.c
+
+OBJS		=	$(LIB_SRCS:.c=.o)	$(PRINT_SRCS:.c=.o)	$(OBJS_CLIENT)	$(OBJS_SERVER)
+
+CFLAGS		=	-Wall -Werror -Wextra
+
+RM			=	rm -f
+
+CC			=	gcc
+
+all: $(NAME) $(CNAME)
+
+%.o: %.c
+		$(CC) -g $(FLAGS) -c $< -o $@
+
+$(CNAME): $(OBJS_CLIENT)
+		$(CC) $(CFLAGS) -o $(CNAME) $(OBJS_CLIENT)
+
+$(SNAME): $(OBJS_SERVER)
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJS_SERVER)
+
+clean:
+		$(RM) $(OBJS) $()
+
+fclean: clean
+		$(RM) $(CNAME) $(SNAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
