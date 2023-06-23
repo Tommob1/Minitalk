@@ -15,13 +15,10 @@ CNAME		=	client
 SNAME		=	server
 
 SRCS_SERVER	=	server.c libft/ft_atoi.c	libft/ft_memset.c	\
-			libft/ft_strlen.c	ft_printf/printf.c	ft_printf/printf_hex.c \
-			ft_printf/printf_char.c	ft_printf/printf_str.c
+				libft/ft_strlen.c	
 
 SRCS_CLIENT	=	client.c libft/ft_atoi.c	libft/ft_memset.c \
-				ft_printf/printf.c	libft/ft_strlen.c	ft_printf/printf_hex.c \
-				ft_printf/printf_char.c	ft_printf/printf_str.c	\
-				ft_printf/printf_char.c
+				libft/ft_strlen.c	
 
 OBJS_SERVER = $(SRCS_SERVER:.c=.o)
 OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
