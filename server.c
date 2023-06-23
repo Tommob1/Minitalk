@@ -11,16 +11,16 @@
 /* ************************************************************************** */
 #include "minitalk.h"
 
-void	printPID()
+void	print_pid(void)
 {
-	pid_t 	pid;
+	pid_t	pid;
 
 	pid = getpid();
-	ft_printf("PID: %d\n", pid);	
+	ft_printf("PID: %d\n", pid);
 }
 
 int	main(void)
 {
-	printPID();
+	print_pid();
 	return (0);
 }
