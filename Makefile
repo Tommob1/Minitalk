@@ -25,8 +25,8 @@ OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
 
 LIB_SRCS	=	libft/ft_atoi.c	libft/ft_memset.c
 
-PRINT_SRCS	=	ft_printf/printf.c libft/ft_strlen.c ft_printf/printf_hex.c \
-				ft_printf/printf_char.c
+PRINT_SRCS	=	libft/printf.c libft/ft_strlen.c libft/printf_hex.c \
+				libft/printf_char.c
 
 OBJS		=	$(LIB_SRCS:.c=.o)	$(PRINT_SRCS:.c=.o)	$(OBJS_CLIENT)	$(OBJS_SERVER)
 
