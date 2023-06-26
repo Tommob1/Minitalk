@@ -21,7 +21,12 @@ SOURCE = ft_strlen.c \
 		ft_substr.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
-		ft_putnbr_fd.c 
+		ft_putnbr_fd.c \
+		printf_char.c \
+		printf_hex.c \
+		printf_int.c \
+		printf_str.c \
+		printf.c
 
 OBJECTS = $(SOURCE:.c=.o)
 
