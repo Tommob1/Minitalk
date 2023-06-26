@@ -30,6 +30,7 @@ void    ft_putstr_fd(char *s, int fd);
 char    *ft_strdup(const char *s1);
 size_t  ft_strlen(const char *str);
 char    *ft_substr(char const *s, unsigned int start, size_t len);
-
+int		ft_printf(const char *format, ...);
+int		printf_char(int c);
 
 #endif
