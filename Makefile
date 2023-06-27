@@ -36,19 +36,19 @@ RM			=	rm -f
 
 CC			=	gcc
 
-all: $(NAME) $(CNAME)
+all: $(SNAME) $(CNAME)
 
 %.o: %.c
-		$(CC) -g $(FLAGS) -c $< -o $@
+		$(CC) -g $(CFLAGS) -c $< -o $@
 
 $(CNAME): $(OBJS_CLIENT)
 		$(CC) $(CFLAGS) -o $(CNAME) $(OBJS_CLIENT)
 
 $(SNAME): $(OBJS_SERVER)
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJS_SERVER)
+		$(CC) $(CFLAGS) -o $(SNAME) $(OBJS_SERVER)
 
 clean:
-		$(RM) $(OBJS) $()
+		$(RM) $(OBJS)
 
 fclean: clean
 		$(RM) $(CNAME) $(SNAME)
