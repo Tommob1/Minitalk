@@ -16,7 +16,7 @@ void	print_pid(void)
 	pid_t	pid;
 
 	pid = getpid();
-	ft_printf("PID: %d\n", pid);
+	ft_printf("Server PID: %d\n", pid);
 }
 
 int	main(void)
