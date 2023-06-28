@@ -11,16 +11,24 @@
 /* ************************************************************************** */
 #include "minitalk.h"
 
-void	print_pid(void)
+static char bit_char(int byte[])
 {
-	pid_t	pid;
+	char	sum;
+	int		i;
 
-	pid = getpid();
-	ft_printf("Server PID: %d\n", pid);
+	sum = 0;
+	i = 8;
+	while(i-- > 0)
+		sum |= (byte[i] << (7 - i));
+	return (sum);
 }
 
 int	main(void)
 {
-	print_pid();
+	pid_t				pid;
+	struct sigaction	sa;
+
+	pid = getpid();
+	ft_printf("Server PID: %d\n", pid);
 	return (0);
 }
