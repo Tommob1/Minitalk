@@ -23,6 +23,15 @@ static char bit_char(int byte[])
 	return (sum);
 }
 
+static void	bit(int	signals, siginfo_t	*info, void	*content)
+{
+	int			num[8];
+	static int	index;
+	static long	max;
+	static char	*string;
+	static int	pos;
+}
+
 int	main(void)
 {
 	pid_t				pid;
@@ -30,5 +39,12 @@ int	main(void)
 
 	pid = getpid();
 	ft_printf("Server PID: %d\n", pid);
+	ft_memset(&sa, 0, sizeof(sa));
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = bit;
+	
+	while (1)
+		pause();
 	return (0);
 }
