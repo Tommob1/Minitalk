@@ -23,6 +23,31 @@ static char bit_char(int byte[])
 	return (sum);
 }
 
+char	*realloc(char **str, long *size, int pos)
+{
+	size_t	i;
+	char	*new_str;
+
+	i = 0;
+	if ((*size) == pos || (*size) >= 50)
+		*size += 50;
+	new_str = malloc(sizeof(char) * ((*size) + 1));
+	if (!new_str)
+		return (NULL);
+	while (i < pos && (*str)[i] && *size != 0)
+	{
+		new_str[i] = (*str)[i];
+		i++;
+	}
+	new_str[(*size)] = '\0';
+	if (i == pos && (*str))
+	{
+		free(*str);
+		*str = NULL;
+	}
+	return (new_str);
+}
+
 static void	bit(int	signals, siginfo_t	*info, void	*content)
 {
 	int			num[8];
@@ -30,6 +55,21 @@ static void	bit(int	signals, siginfo_t	*info, void	*content)
 	static long	max;
 	static char	*string;
 	static int	pos;
+
+	if (max == 0 || pos == max)
+		string = realloc(&string, &max, pos);
+	num[index++] = (signals == 31);
+	if (index == 8 && pos < max)
+	{
+		index = 0;
+		string[pos++] = bit_char(num);
+		if (end(num, &string, &pos, &index))
+		{
+			max = 0;
+			kill(info->si_pid, SIGUSR1);
+			return ;
+		}
+	}
 }
 
 int	main(void)
