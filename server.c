@@ -23,7 +23,26 @@ static char bit_char(int byte[])
 	return (sum);
 }
 
-char	*realloc(char **str, long *size, int pos)
+int	end(int byte[], char **string, int *pos, int *index)
+{
+	int i;
+	
+	i = 0;
+	while(byte[i] == 0)
+		i++;
+	if (i == 8)
+	{
+		(*string)[(*pos)] = '\0';
+		write(1, *string, (*pos + 1));
+		free(*string);
+		*string = NULL;
+		*index = 0;
+		*pos = 0;
+	}
+	return (i == 8);
+}
+
+char	*reallocate(char **str, long *size, int pos)
 {
 	size_t	i;
 	char	*new_str;
@@ -57,7 +76,7 @@ static void	bit(int	signals, siginfo_t	*info, void	*content)
 	static int	pos;
 
 	if (max == 0 || pos == max)
-		string = realloc(&string, &max, pos);
+		string = reallocate(&string, &max, pos);
 	num[index++] = (signals == 31);
 	if (index == 8 && pos < max)
 	{
@@ -83,7 +102,8 @@ int	main(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = bit;
-	
+	sigaction(SIGUSR1, &sa, 0);
+	sigaction(SIGUSR2, &sa, 0);
 	while (1)
 		pause();
 	return (0);
