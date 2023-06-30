@@ -14,9 +14,15 @@
 # define MINITALK_H
 
 # include <signal.h>
+# include <stdlib.h>
+# include <sys/types.h>
 # include <unistd.h>
 # include <stdio.h>
-# include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
+
+static char bit_char(int byte[]);
+int         end(int byte[], char **string, int *pos, int *index);
+char        *reallocate(char **str, long *size, int pos);
+static void bit(int signals, siginfo_t  *info, void *content);
 
 #endif
