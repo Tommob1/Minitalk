@@ -30,7 +30,7 @@ PRINT_SRCS	=	libft/printf.c libft/ft_strlen.c libft/printf_hex.c \
 
 OBJS		=	$(LIB_SRCS:.c=.o)	$(PRINT_SRCS:.c=.o)	$(OBJS_CLIENT)	$(OBJS_SERVER)
 
-CFLAGS		=	-Wall -Werror -Wextra
+CFLAGS		=	-Wall -Wextra -Werror
 
 RM			=	rm -f
 
