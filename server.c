@@ -67,7 +67,7 @@ char	*reallocate(char **str, long *size, unsigned int pos)
 	return (new_str);
 }
 
-static void	bit(int signals, siginfo_t *info, void *content)
+static void	bit(int signals, siginfo_t *info)
 {
 	int			num[8];
 	static int	index;
