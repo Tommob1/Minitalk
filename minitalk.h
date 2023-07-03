@@ -23,6 +23,6 @@
 static char bit_char(int byte[]);
 int         end(int byte[], char **string, int *pos, int *index);
 char        *reallocate(char **str, long *size, unsigned int pos);
-static void bit(int signals, siginfo_t  *info);
+static void bit(int signals, siginfo_t  *info, void *content);
 
 #endif
