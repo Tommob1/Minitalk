@@ -42,7 +42,7 @@ int	end(int byte[], char **string, int *pos, int *index)
 	return (i == 8);
 }
 
-char	*reallocate(char **str, long *size, int pos)
+char	*reallocate(char **str, long *size, unsigned int	pos)
 {
 	size_t	i;
 	char	*new_str;
