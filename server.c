@@ -67,13 +67,14 @@ char	*reallocate(char **str, long *size, unsigned int pos)
 	return (new_str);
 }
 
-static void	bit(int signals, siginfo_t *info)
+static void	bit(int signals, siginfo_t *info, void *content)
 {
 	int			num[8];
 	static int	index;
 	static long	max;
 	static char	*string;
 	static int	pos;
+	(void)	*content;
 
 	if (max == 0 || pos == max)
 		string = reallocate(&string, &max, pos);
