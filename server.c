@@ -11,24 +11,24 @@
 /* ************************************************************************** */
 #include "minitalk.h"
 
-static char bit_char(int byte[])
+static char	bit_char(int byte[])
 {
 	char	sum;
 	int		i;
 
 	sum = 0;
 	i = 8;
-	while(i-- > 0)
+	while (i-- > 0)
 		sum |= (byte[i] << (7 - i));
 	return (sum);
 }
 
 int	end(int byte[], char **string, int *pos, int *index)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	while(byte[i] == 0)
+	while (byte[i] == 0)
 		i++;
 	if (i == 8)
 	{
@@ -42,7 +42,7 @@ int	end(int byte[], char **string, int *pos, int *index)
 	return (i == 8);
 }
 
-char	*reallocate(char **str, long *size, unsigned int	pos)
+char	*reallocate(char **str, long *size, unsigned int pos)
 {
 	size_t	i;
 	char	*new_str;
@@ -67,7 +67,7 @@ char	*reallocate(char **str, long *size, unsigned int	pos)
 	return (new_str);
 }
 
-static void	bit(int	signals, siginfo_t	*info, void	*content)
+static void	bit(int signals, siginfo_t *info, void *content)
 {
 	int			num[8];
 	static int	index;
