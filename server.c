@@ -98,7 +98,7 @@ int	main(void)
 	struct sigaction	sa;
 
 	pid = getpid();
-	ft_printf("Server PID: %d\n", pid);
+	ft_printf("%d\n", pid);
 	ft_memset(&sa, 0, sizeof(sa));
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_SIGINFO;
