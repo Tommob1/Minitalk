@@ -22,7 +22,8 @@ SOURCE = ft_strlen.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_putnbr_fd.c \
-		ft_memset.c
+		ft_memset.c \
+		ft_itoa.c \
 		printf_char.c \
 		printf_hex.c \
 		printf_int.c \
