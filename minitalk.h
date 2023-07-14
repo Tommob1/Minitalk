@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include "libft/libft.h"
 
-int         end(int byte[], char **string, int *pos, int *index);
-char        *reallocate(char **str, long *size, unsigned int pos);
+int			end(int byte[], char **string, int *pos, int *index);
+char		*reallocate(char **str, long *size, unsigned int pos);
 
 #endif
