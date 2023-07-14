@@ -105,7 +105,7 @@ int	main(void)
 	sa.sa_sigaction = bit;
 	sigaction(SIGUSR1, &sa, 0);
 	sigaction(SIGUSR2, &sa, 0);
-	//while (1)
-	//	pause();
+	while (1)
+		pause();
 	return (0);
 }
