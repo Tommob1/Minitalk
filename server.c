@@ -74,8 +74,8 @@ static void	bit(int signals, siginfo_t *info, void *content)
 	static long	max;
 	static char	*string;
 	static int	pos;
-	(void)	*content;
 
+	(void)	*content;
 	if (max == 0 || pos == max)
 		string = reallocate(&string, &max, pos);
 	num[index++] = (signals == 31);
