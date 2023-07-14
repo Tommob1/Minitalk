@@ -24,7 +24,7 @@ void	bit_signal(int pid, char c, int stop)
 		else
 			kill(pid, SIGUSR1);
 		usleep(50);
-		shift--;			
+		shift--;
 	}
 	if (stop == 0)
 	{
@@ -44,11 +44,26 @@ static void	recieved(int signal)
 	exit(0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	int		i;
 	pid_t	pid;
 
-	recieved(20);
+	pid = ft_atoi(argv[1]);
+	i = 0;
+	signal(SIGUSR1, recieved);
+	if (argc != 3)
+		return (1);
+	if (kill (pid, 0) == -1)
+	{
+		perror("INVALID PID");
+		exit(1);
+	}
+	while (argv[2][i])
+	{
+		bit_signal(pid, argv[2][i], 1);
+		i++;
+	}
+	bit_signal(pid, argv[2][i], 0);
 	return (0);
 }
