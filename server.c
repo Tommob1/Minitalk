@@ -17,7 +17,7 @@ void	sig_handle(int signal)
 	static int	i;
 
 	if (signal == SIGUSR1)
-			i |= (0x01 << bit);
+		i |= (0x01 << bit);
 	bit++;
 	if (bit == 8)
 	{
