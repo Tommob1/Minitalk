@@ -11,101 +11,41 @@
 /* ************************************************************************** */
 #include "minitalk.h"
 
-static char	bit_char(int byte[])
+void	sig_handle(int signum, siginfo_t *info, void *context)
 {
-	char	sum;
-	int		i;
+	static int	bit;
+	static int	i;
 
-	sum = 0;
-	i = 8;
-	while (i-- > 0)
-		sum |= (byte[i] << (7 - i));
-	return (sum);
-}
-
-int	end(int byte[], char **string, int *pos, int *index)
-{
-	int	i;
-
-	i = 0;
-	while (byte[i] == 0)
-		i++;
-	if (i == 8)
+	if (signal == SIGUSR1)
+			i |= (0x01 << bit);
+	bit++;
+	if (bit == 8)
 	{
-		(*string)[(*pos)] = '\0';
-		write(1, *string, (*pos + 1));
-		free(*string);
-		*string = NULL;
-		*index = 0;
-		*pos = 0;
-	}
-	return (i == 8);
-}
-
-char	*reallocate(char **str, long *size, unsigned int pos)
-{
-	size_t	i;
-	char	*new_str;
-
-	i = 0;
-	if ((*size) == pos || (*size) >= 50)
-		*size += 50;
-	new_str = malloc(sizeof(char) * ((*size) + 1));
-	if (!new_str)
-		return (NULL);
-	while (i < pos && (*str)[i] && *size != 0)
-	{
-		new_str[i] = (*str)[i];
-		i++;
-	}
-	new_str[(*size)] = '\0';
-	if (i == pos && (*str))
-	{
-		free(*str);
-		*str = NULL;
-	}
-	return (new_str);
-}
-
-static void	bit(int signals, siginfo_t *info, void *content)
-{
-	int			num[8];
-	static int	index;
-	static long	max;
-	static char	*string;
-	static int	pos;
-
-	(void)	*content;
-	if (max == 0 || pos == max)
-		string = reallocate(&string, &max, pos);
-	num[index++] = (signals == 31);
-	if (index == 8 && pos < max)
-	{
-		index = 0;
-		string[pos++] = bit_char(num);
-		if (end(num, &string, &pos, &index))
-		{
-			max = 0;
-			kill(info->si_pid, SIGUSR1);
-			return ;
-		}
+		ft_printf("%c", i);
+		bit = 0;
+		i = 0;
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	pid_t				pid;
-	struct sigaction	sa;
+	int	pid;
 
+	(void)argv;
+	if (argc != 1)
+	{
+		ft_printf("\033[91mError: wrong format. \033[0m\n");
+		ft_printf("\033[33mTry: ./server\033[0m\n");
+		return (0);
+	}
 	pid = getpid();
-	ft_printf("%d\n", pid);
-	ft_memset(&sa, 0, sizeof(sa));
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = bit;
-	sigaction(SIGUSR1, &sa, 0);
-	sigaction(SIGUSR2, &sa, 0);
-	while (1)
-		pause();
+	ft_printf("\033[94mPID\033[0m \033[96m->\033[0m %d\n", pid);
+	ft_printf("\033[90mWaiting for a message...\033[0m\n");
+	while (argc == 1)
+	{
+		signal(SIGUSR1, sig_handle);
+		signal(SIGUSR2, sig_handle);
+		pause ();
+	}
 	return (0);
 }
