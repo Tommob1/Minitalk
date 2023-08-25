@@ -15,16 +15,16 @@
 void	bit_signal(int pid, char c)
 {
 	int		bit;
-	
+
 	bit = 0;
 	while (bit < 8)
 	{
 		if ((c & (0x01 << bit)) != 0)
-				kill(pid, SIGUSR1);
+			kill(pid, SIGUSR1);
 		else
-				kill(pid, SIGUSR2);
+			kill(pid, SIGUSR2);
 		usleep(100);
-		bit++;	
+		bit++;
 	}
 }
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 	{
 		ft_printf("\033[91mError: wrong format.\033[0m\n");
 		ft_printf("\033[33mTry: ./client <PID> <MESSAGE>\033[0m\n");
-		return(1);
+		return (1);
 	}
 	return (0);
 }
