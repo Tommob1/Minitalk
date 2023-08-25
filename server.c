@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "minitalk.h"
 
-void	sig_handle(int signum, siginfo_t *info, void *context)
+void	sig_handle(int signal)
 {
 	static int	bit;
 	static int	i;
