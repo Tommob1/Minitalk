@@ -12,58 +12,43 @@
 
 #include "minitalk.h"
 
-void	bit_signal(int pid, char c, int stop)
+void	bit_signal(int pid, char c)
 {
-	int	shift;
-
-	shift = 7;
-	while (stop == 1 && shift >= 0)
+	int		bit;
+	
+	bit = 0;
+	while (bit < 8)
 	{
-		if (((c >> shift) & 1))
-			kill(pid, SIGUSR2);
+		if ((c & (0x01 << bit)) != 0)
+				kill(pid, SIGUSR1);
 		else
-			kill(pid, SIGUSR1);
-		usleep(50);
-		shift--;
+				kill(pid, SIGUSR2);
+		usleep(100);
+		bit++;	
 	}
-	if (stop == 0)
-	{
-		while (stop < 8)
-		{
-			kill(pid, SIGUSR1);
-			usleep(50);
-			stop++;
-		}
-	}
-}
-
-static void	recieved(int signal)
-{
-	(void)signal;
-	write(1, "MESSAGE RECIEVED\n", 17);
-	exit(0);
 }
 
 int	main(int argc, char **argv)
 {
 	int		i;
-	pid_t	pid;
+	int		pid;
 
-	pid = ft_atoi(argv[1]);
 	i = 0;
-	signal(SIGUSR1, recieved);
-	if (argc != 3)
-		return (1);
-	if (kill (pid, 0) == -1)
+	if (argc == 3)
 	{
-		perror("INVALID PID");
-		exit(1);
+		pid = ft_atoi(argv[1]);
+		while (argv[2][i] != '\0')
+		{
+			bit_signal(pid, argv[2][i]);
+			i++;
+		}
+		bit_signal(pid, '\n');
 	}
-	while (argv[2][i])
+	else
 	{
-		bit_signal(pid, argv[2][i], 1);
-		i++;
+		ft_printf("\033[91mError: wrong format.\033[0m\n");
+		ft_printf("\033[33mTry: ./client <PID> <MESSAGE>\033[0m\n");
+		return(1);
 	}
-	bit_signal(pid, argv[2][i], 0);
 	return (0);
 }
