@@ -12,6 +12,18 @@
 
 #include "minitalk.h"
 
+/*
+	Sends individual bits of a character 'c' to the server with the PID.
+
+	Iteratively examines each bit of the character. 
+
+	If the bit is 1, it sends the SIGUSR1 signal.
+	If the bit is 0, it sends the SIGUSR2 signal.
+
+	After sending each signal, the function sleeps for 100 microseconds
+	to avoid overwhelming the server.
+*/
+
 void	bit_signal(int pid, char c)
 {
 	int		bit;
@@ -27,6 +39,13 @@ void	bit_signal(int pid, char c)
 		bit++;
 	}
 }
+
+/*
+	Checks if the program has been run with the correct number of arguments.
+	Parses the Process ID (PID) of the server from the first argument.
+	Sends each character of the message to the server using 'bit_signal'.
+	Sends newline character to indicate the end of the message.
+*/
 
 int	main(int argc, char **argv)
 {
