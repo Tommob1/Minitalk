@@ -40,6 +40,18 @@ void	sig_handle(int signal)
 	}
 }
 
+/*
+	Checks if program is being run with correct number of arguments.
+
+	Prints the Process ID (PID) to the terminal so that it can be used
+	by the client.
+
+	Enters an infinite loop to wait for the signals 
+	(SIGUSR1 and SIGUSR2).
+
+	Registers 'sig_handle' as the handler function for the signals.
+*/
+
 int	main(int argc, char **argv)
 {
 	int	pid;
