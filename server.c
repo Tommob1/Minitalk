@@ -11,6 +11,19 @@
 /* ************************************************************************** */
 #include "minitalk.h"
 
+/*
+	Handles the UNIX signals SIGUSR1 and SIGUSR2.
+	
+	Uses 2 static integers, 'bit' and 'i' to collect the bits of characters
+	sent by the client. When SIGUSR1 is received, the function sets the 
+	corresponding bit in 'i'. 
+	
+	Once 8 bits are received, the ASCII character they form is 
+	printed to the terminal.
+
+	The 'bit' and 'i' are then reset for the next character.
+*/
+
 void	sig_handle(int signal)
 {
 	static int	bit;
